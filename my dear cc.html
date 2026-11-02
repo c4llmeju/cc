@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Love Letter</title>
+    <style>
+      :root {
+        --rose-1: #fff1f7;
+        --rose-2: #ffd9eb;
+        --rose-3: #f7bfd7;
+        --rose-4: #e98bb2;
+        --rose-5: #d15c8d;
+        --rose-6: #b63d6c;
+        --paper: #fffafc;
+        --paper-shadow: #f6dfe9;
+        --ink: #69314f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at top, #fffdfd 0%, var(--rose-1) 25%, #fbe5f0 48%, #f5d6e7 100%);
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--ink);
+      }
+
+      .scene {
+        position: relative;
+        width: min(80vw, 650px);
+        height: 430px;
+        display: grid;
+        place-items: center;
+        perspective: 1400px;
+      }
+
+      .envelope {
+        position: relative;
+        width: min(78vw, 620px);
+        height: 360px;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.8s ease;
+      }
+
+      .envelope:hover {
+        transform: translateY(-2px);
+      }
+
+      .envelope-body {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(135deg, #f9dfe9 0%, #f5c3d8 35%, #eca7c3 100%);
+        border: 2px solid rgba(166, 85, 119, 0.5);
+        border-radius: 12px;
+        box-shadow:
+          0 18px 35px rgba(143, 66, 101, 0.18),
+          inset 0 0 0 4px rgba(255, 255, 255, 0.15);
+        overflow: hidden;
+      }
+
+      .flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 55%;
+        background: linear-gradient(135deg, #f7d7e6 0%, #faa5c5 100%);
+        clip-path: polygon(0 0, 50% 62%, 100% 0);
+        border-top: 2px solid rgba(166, 85, 119, 0.55);
+        transform-origin: top center;
+        transition: transform 0.9s cubic-bezier(0.25, 1, 0.35, 1);
+        z-index: 3;
+      }
+
+      .envelope.open .flap {
+        transform: rotateX(180deg);
+      }
+
+      .letter {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(78%, 480px);
+        min-height: 240px;
+        visibility: hidden;
+        pointer-events: none;
+        padding: 30px 28px 20px;
+        background: linear-gradient(180deg, var(--paper) 0%, #fff7fb 100%);
+        border: 1px solid rgba(160, 93, 127, 0.4);
+        box-shadow:
+          0 15px 24px rgba(124, 62, 92, 0.14),
+          inset 0 0 0 2px rgba(255,255,255,0.6);
+        transform: translate(-50%, -50%);
+        transition: transform 0.9s cubic-bezier(0.25, 1, 0.35, 1), box-shadow 0.5s ease, width 0.5s ease;
+        z-index: 1;
+        font-style: italic;
+        color: var(--ink);
+      }
+
+      .envelope.open .letter {
+        width: min(92vw, 760px);
+        max-height: min(84vh, 760px);
+        visibility: visible;
+        pointer-events: auto;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 38px clamp(24px, 5vw, 48px) 28px;
+        transform: translate(-50%, calc(-50% - 12px));
+        z-index: 4;
+        box-shadow:
+          0 22px 32px rgba(124, 62, 92, 0.18),
+          inset 0 0 0 2px rgba(255,255,255,0.65);
+      }
+
+      .open-letter-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 5;
+        transform: translate(-50%, -50%);
+        padding: 14px 22px;
+        border: 1px solid var(--rose-6);
+        border-radius: 999px;
+        background: var(--paper);
+        box-shadow: 0 5px 14px rgba(124, 62, 92, 0.2);
+        color: var(--rose-6);
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .open-letter-button:hover {
+        background: #fff0f6;
+      }
+
+      .open-letter-button:focus-visible {
+        outline: 3px solid var(--rose-6);
+        outline-offset: 4px;
+      }
+
+      .envelope.open .open-letter-button {
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .letter::before {
+        content: "";
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        border: 1px solid rgba(186, 118, 151, 0.3);
+        pointer-events: none;
+      }
+
+      h1 {
+        margin: 12px 0 18px;
+        font-size: clamp(2rem, 3vw, 2.9rem);
+        line-height: 1.1;
+        font-weight: 700;
+        font-style: normal;
+        letter-spacing: 0.03em;
+      }
+
+      .letter p {
+        margin: 0 0 14px;
+        line-height: 1.9;
+        font-size: clamp(1rem, 1.8vw, 1.2rem);
+      }
+
+      .signature {
+        margin-top: 18px;
+        text-align: right;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--rose-6);
+      }
+
+      .letter-close {
+        display: block;
+        margin: 28px auto 0;
+        padding: 12px 24px;
+        border: 1px solid var(--rose-6);
+        border-radius: 999px;
+        background: var(--rose-6);
+        color: white;
+        font: inherit;
+        font-style: normal;
+        cursor: pointer;
+      }
+
+      .letter-close:hover {
+        background: #963155;
+      }
+
+      .letter-close:focus-visible {
+        outline: 3px solid var(--rose-4);
+        outline-offset: 3px;
+      }
+
+      @media (max-width: 560px) {
+        .scene {
+          height: 380px;
+        }
+
+        .envelope {
+          height: 310px;
+        }
+
+        .letter {
+          width: 82%;
+          padding: 20px 18px 16px;
+        }
+
+        .envelope.open .letter {
+          width: 94vw;
+          max-height: 84vh;
+          padding: 30px 24px 24px;
+        }
+
+        .letter p {
+          line-height: 1.7;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scene">
+      <div class="envelope" id="envelope">
+        <div class="envelope-body"></div>
+        <button class="open-letter-button" type="button" aria-controls="letter" aria-expanded="false">open if you're ready ccutie</button>
+        <div class="letter" id="letter">
+          <h1>To my Dearest CC,</h1>
+          <p>
+            whenever youre reading this, i hope you know that i care so much more about than i could ever put in words or actions.<br>
+            no paragraph or spoiling could ever express how i feel.<br>
+            and im scared to show it to you so ill go with your flow.<br>
+            but know that whenever you feel ready for anything, more or less, ill go with it because i am so ready to go through anything with you.<br>
+            let me flirt with you or push me away so its almost impossible for me to climb back up to you.<br>
+            ill really do anything it needs to be with you in the end.<br>
+            i know how hard it will be and i know that pretty sure both of us will go through hard times every now and then but i will be with you making you feel safe.<br>
+            whenver it gets too much you can always fall down on me or use me to lose stress or avoidance by pushing me away.<br>
+            lose me as you want so you feel better, please.<br>
+            whenever you read this and no matter how good or bad you feel, know that i am thinking about you, i always do. i will never leave you alone anymore<br>
+            i am scared that everything i say just feels the same in the end but even if it does, i just want you to know that i really try to think about new things to tell you cause you deserve it.<br>
+            you deserve the world and noone could give it to you so im trying my best.<br>
+            i wanna be good for you so bad.<br>
+            i wanna be what you like.<br>
+            as much as possible.<br>
+            i will only say this once but im trying really bad for you to like me.<br>
+            and when you said today that i make you feel better with your avoidance it made me feel so much better.<br>
+            my heart started to feel so much easier instead of so heavy.<br>
+            thank you for everything dear cc.<br>
+          </p>
+          <p class="signature">forever yours, juju</p>
+          <button class="letter-close" type="button">Close letter</button>
+        </div>
+        <div class="flap"></div>
+      </div>
+    </div>
+    <script>
+      const envelope = document.getElementById("envelope");
+      const openButton = envelope.querySelector(".open-letter-button");
+
+      function toggleEnvelope() {
+        const isOpen = envelope.classList.toggle("open");
+        openButton.setAttribute("aria-expanded", String(isOpen));
+      }
+
+      openButton.addEventListener("click", toggleEnvelope);
+      envelope.querySelector(".letter-close").addEventListener("click", (event) => {
+        event.preventDefault();
+        toggleEnvelope();
+      });
+    </script>
+  </body>
+</html>
