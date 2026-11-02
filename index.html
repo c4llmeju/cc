@@ -211,6 +211,32 @@
         outline-offset: 3px;
       }
 
+      .toast {
+        position: fixed;
+        top: 24px;
+        left: 50%;
+        z-index: 10;
+        max-width: 90vw;
+        padding: 14px 26px;
+        border: 1px solid var(--rose-6);
+        border-radius: 999px;
+        background: var(--paper);
+        color: var(--rose-6);
+        font-style: italic;
+        font-weight: 700;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(124, 62, 92, 0.22);
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, -20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
       @media (max-width: 560px) {
         .scene {
           height: 380px;
@@ -249,6 +275,8 @@
     </style>
   </head>
   <body>
+    <div class="toast" id="toast" role="status" aria-live="polite">your avoidance could never scare me</div>
+
     <div class="scene">
       <div class="envelope" id="envelope">
         <div class="envelope-body"></div>
@@ -325,11 +353,29 @@
       const openButton = envelope.querySelector(".open-letter-button");
       const closeButton = envelope.querySelector(".letter-close");
 
+      const toast = document.getElementById("toast");
+      let toastTimer;
+
+      function showToast() {
+        clearTimeout(toastTimer);
+        toast.classList.add("show");
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 5000);
+      }
+
+      function hideToast() {
+        clearTimeout(toastTimer);
+        toast.classList.remove("show");
+      }
+
       function setOpen(open) {
+        const wasOpen = envelope.classList.contains("open");
         envelope.classList.toggle("open", open);
         openButton.setAttribute("aria-expanded", String(open));
         if (open) {
           letter.scrollTop = 0;
+          hideToast();
+        } else if (wasOpen) {
+          showToast();
         }
       }
 
