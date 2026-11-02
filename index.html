@@ -7,13 +7,9 @@
     <style>
       :root {
         --rose-1: #fff1f7;
-        --rose-2: #ffd9eb;
-        --rose-3: #f7bfd7;
         --rose-4: #e98bb2;
-        --rose-5: #d15c8d;
         --rose-6: #b63d6c;
         --paper: #fffafc;
-        --paper-shadow: #f6dfe9;
         --ink: #69314f;
       }
 
@@ -26,15 +22,15 @@
         min-height: 100vh;
         display: grid;
         place-items: center;
-        background:
-          radial-gradient(circle at top, #fffdfd 0%, var(--rose-1) 25%, #fbe5f0 48%, #f5d6e7 100%);
+        background: radial-gradient(circle at top, #fffdfd 0%, var(--rose-1) 25%, #fbe5f0 48%, #f5d6e7 100%);
         font-family: Georgia, "Times New Roman", serif;
         color: var(--ink);
+        overflow-x: hidden;
       }
 
       .scene {
         position: relative;
-        width: min(80vw, 650px);
+        width: min(92vw, 650px);
         height: 430px;
         display: grid;
         place-items: center;
@@ -47,11 +43,11 @@
         height: 360px;
         cursor: pointer;
         user-select: none;
-        transition: transform 0.8s ease;
+        transition: transform 0.6s ease;
       }
 
-      .envelope:hover {
-        transform: translateY(-2px);
+      .envelope:not(.open):hover {
+        transform: translateY(-3px);
       }
 
       .envelope-body {
@@ -75,50 +71,60 @@
         height: 55%;
         background: linear-gradient(135deg, #f7d7e6 0%, #faa5c5 100%);
         clip-path: polygon(0 0, 50% 62%, 100% 0);
-        border-top: 2px solid rgba(166, 85, 119, 0.55);
         transform-origin: top center;
-        transition: transform 0.9s cubic-bezier(0.25, 1, 0.35, 1);
+        transition: transform 0.7s cubic-bezier(0.25, 1, 0.35, 1);
         z-index: 3;
+        pointer-events: none;
       }
 
       .envelope.open .flap {
         transform: rotateX(180deg);
       }
 
+      /* Brief: im geschlossenen Zustand unsichtbar, beim Öffnen weiches Einblenden */
       .letter {
         position: absolute;
         left: 50%;
         top: 50%;
         width: min(78%, 480px);
         min-height: 240px;
-        visibility: hidden;
+        opacity: 0;
         pointer-events: none;
         padding: 30px 28px 20px;
         background: linear-gradient(180deg, var(--paper) 0%, #fff7fb 100%);
         border: 1px solid rgba(160, 93, 127, 0.4);
         box-shadow:
           0 15px 24px rgba(124, 62, 92, 0.14),
-          inset 0 0 0 2px rgba(255,255,255,0.6);
-        transform: translate(-50%, -50%);
-        transition: transform 0.9s cubic-bezier(0.25, 1, 0.35, 1), box-shadow 0.5s ease, width 0.5s ease;
+          inset 0 0 0 2px rgba(255, 255, 255, 0.6);
+        transform: translate(-50%, -35%) scale(0.85);
+        transition:
+          transform 0.8s cubic-bezier(0.25, 1, 0.35, 1),
+          opacity 0.4s ease,
+          width 0.6s ease;
         z-index: 1;
         font-style: italic;
         color: var(--ink);
+        cursor: default;
       }
 
       .envelope.open .letter {
         width: min(92vw, 760px);
         max-height: min(84vh, 760px);
-        visibility: visible;
+        opacity: 1;
         pointer-events: auto;
         overflow-y: auto;
         overscroll-behavior: contain;
         padding: 38px clamp(24px, 5vw, 48px) 28px;
-        transform: translate(-50%, calc(-50% - 12px));
+        transform: translate(-50%, -50%) scale(1);
+        transition-delay: 0.3s, 0.3s, 0.3s;
         z-index: 4;
         box-shadow:
           0 22px 32px rgba(124, 62, 92, 0.18),
-          inset 0 0 0 2px rgba(255,255,255,0.65);
+          inset 0 0 0 2px rgba(255, 255, 255, 0.65);
+      }
+
+      .envelope.open {
+        cursor: default;
       }
 
       .open-letter-button {
@@ -136,6 +142,7 @@
         font: inherit;
         font-weight: 700;
         cursor: pointer;
+        transition: opacity 0.3s ease, background 0.2s ease;
       }
 
       .open-letter-button:hover {
@@ -148,24 +155,21 @@
       }
 
       .envelope.open .open-letter-button {
-        visibility: hidden;
+        opacity: 0;
         pointer-events: none;
       }
 
       .letter::before {
         content: "";
         position: absolute;
-        top: 12px;
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
+        inset: 12px;
         border: 1px solid rgba(186, 118, 151, 0.3);
         pointer-events: none;
       }
 
       h1 {
         margin: 12px 0 18px;
-        font-size: clamp(2rem, 3vw, 2.9rem);
+        font-size: clamp(2rem, 5vw, 2.9rem);
         line-height: 1.1;
         font-weight: 700;
         font-style: normal;
@@ -173,9 +177,9 @@
       }
 
       .letter p {
-        margin: 0 0 14px;
+        margin: 0 0 16px;
         line-height: 1.9;
-        font-size: clamp(1rem, 1.8vw, 1.2rem);
+        font-size: clamp(1rem, 2.4vw, 1.2rem);
       }
 
       .signature {
@@ -232,7 +236,15 @@
         .letter p {
           line-height: 1.7;
         }
+      }
 
+      @media (prefers-reduced-motion: reduce) {
+        .flap,
+        .letter,
+        .envelope {
+          transition-duration: 0.01s;
+          transition-delay: 0s !important;
+        }
       }
     </style>
   </head>
@@ -240,52 +252,102 @@
     <div class="scene">
       <div class="envelope" id="envelope">
         <div class="envelope-body"></div>
-        <button class="open-letter-button" type="button" aria-controls="letter" aria-expanded="false">open if you're ready ccutie</button>
-        <div class="letter" id="letter">
+        <button class="open-letter-button" type="button" aria-controls="letter" aria-expanded="false">
+          open if you're ready ccutie
+        </button>
+
+        <div class="letter" id="letter" role="dialog" aria-label="Love letter">
           <h1>To my Dearest CC,</h1>
+
           <p>
-            whenever youre reading this, i hope you know that i care so much more about than i could ever put in words or actions.<br>
-            no paragraph or spoiling could ever express how i feel.<br>
-            and im scared to show it to you so ill go with your flow.<br>
-            but know that whenever you feel ready for anything, more or less, ill go with it because i am so ready to go through anything with you.<br>
-            let me flirt with you or push me away so its almost impossible for me to climb back up to you.<br>
-            ill really do anything it needs to be with you in the end.<br>
-            i know how hard it will be and i know that pretty sure both of us will go through hard times every now and then but i will be with you making you feel safe.<br>
-            whenver it gets too much you can always fall down on me or use me to lose stress or avoidance by pushing me away.<br>
-            lose me as you want so you feel better, please.<br>
-            whenever you read this and no matter how good or bad you feel, know that i am thinking about you, i always do. i will never leave you alone anymore<br>
-            i am scared that everything i say just feels the same in the end but even if it does, i just want you to know that i really try to think about new things to tell you cause you deserve it.<br>
-            you deserve the world and noone could give it to you so im trying my best.<br>
-            i wanna be good for you so bad.<br>
-            i wanna be what you like.<br>
-            as much as possible.<br>
-            i love and hate missing you at the same time. every time i miss you it hurts but i know that talking to you the next time will feel so much better cause i was missing you so much. <br>
-            AND one thing i so love about is the way you like to dress up. i love to get your outfit pictures and when you tell me what you thought when making that outfit like omg yes please tell me what went through your little pretty head when choosing this insane looking outfit. <br>
-            and i dont want this to be long but honest. i really want you to be better. i know this is a lot i expect from you but if we trust each other enough i am so sure we can do amazing things.<br>
-            i will only say this once but im trying really bad for you to like me.<br>
-            and when you said today that i make you feel better with your avoidance it made me feel so much better.<br>
-            my heart started to feel so much easier instead of so heavy.<br>
-            thank you for everything dear cc. love you so so so so fucking much<br>
+            whenever youre reading this, i hope you know that i care so much more about you than i could ever put in words or actions.
+            no paragraph or spoiling could ever express how i feel.
+            and im scared to show it to you so ill go with your flow.
           </p>
+
+          <p>
+            but know that whenever you feel ready for anything, more or less, ill go with it because i am so ready to go through anything with you.
+            let me flirt with you or push me away so its almost impossible for me to climb back up to you.
+            ill really do anything it needs to be with you in the end.
+          </p>
+
+          <p>
+            i know how hard it will be and i know that pretty sure both of us will go through hard times every now and then but i will be with you making you feel safe.
+            whenever it gets too much you can always fall down on me or use me to lose stress or avoidance by pushing me away.
+            lose me as you want so you feel better, please.
+          </p>
+
+          <p>
+            whenever you read this and no matter how good or bad you feel, know that i am thinking about you, i always do. i will never leave you alone anymore.
+          </p>
+
+          <p>
+            i am scared that everything i say just feels the same in the end but even if it does, i just want you to know that i really try to think about new things to tell you cause you deserve it.
+            you deserve the world and no one could give it to you so im trying my best.
+            i wanna be good for you so bad.
+            i wanna be what you like.
+            as much as possible.
+          </p>
+
+          <p>
+            i love and hate missing you at the same time. every time i miss you it hurts but i know that talking to you the next time will feel so much better cause i was missing you so much.
+          </p>
+
+          <p>
+            AND one thing i so love about you is the way you like to dress up. i love to get your outfit pictures and when you tell me what you thought when making that outfit like omg yes please tell me what went through your little pretty head when choosing this insane looking outfit.
+          </p>
+
+          <p>
+            and i dont want this to be long but honest. i really want you to be better. i know this is a lot i expect from you but if we trust each other enough i am so sure we can do amazing things.
+            i will only say this once but im trying really bad for you to like me.
+          </p>
+
+          <p>
+            and when you said today that i make you feel better with your avoidance it made me feel so much better.
+            my heart started to feel so much easier instead of so heavy.
+          </p>
+
+          <p>thank you for everything dear cc. love you so so so so fucking much</p>
+
           <p class="signature">forever yours, juju</p>
           <button class="letter-close" type="button">Close letter</button>
         </div>
+
         <div class="flap"></div>
       </div>
     </div>
+
     <script>
       const envelope = document.getElementById("envelope");
+      const letter = document.getElementById("letter");
       const openButton = envelope.querySelector(".open-letter-button");
+      const closeButton = envelope.querySelector(".letter-close");
 
-      function toggleEnvelope() {
-        const isOpen = envelope.classList.toggle("open");
-        openButton.setAttribute("aria-expanded", String(isOpen));
+      function setOpen(open) {
+        envelope.classList.toggle("open", open);
+        openButton.setAttribute("aria-expanded", String(open));
+        if (open) {
+          letter.scrollTop = 0;
+        }
       }
 
-      openButton.addEventListener("click", toggleEnvelope);
-      envelope.querySelector(".letter-close").addEventListener("click", (event) => {
-        event.preventDefault();
-        toggleEnvelope();
+      // Klick auf den Umschlag oder den Button öffnet den Brief
+      envelope.addEventListener("click", (event) => {
+        if (!envelope.classList.contains("open")) {
+          setOpen(true);
+        }
+      });
+
+      // Klick im Brief soll ihn nicht schließen / neu auslösen
+      letter.addEventListener("click", (event) => event.stopPropagation());
+
+      closeButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        setOpen(false);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setOpen(false);
       });
     </script>
   </body>
