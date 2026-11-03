@@ -6,11 +6,11 @@
     <title>Love Letter</title>
     <style>
       :root {
-        --rose-1: #fff1f7;
-        --rose-4: #e98bb2;
-        --rose-6: #b63d6c;
-        --paper: #fffafc;
-        --ink: #69314f;
+        --rose-1: #fff1f1;
+        --rose-4: #e0525c;
+        --rose-6: #a8142a;
+        --paper: #fffafa;
+        --ink: #5c1f26;
       }
 
       * {
@@ -22,7 +22,7 @@
         min-height: 100vh;
         display: grid;
         place-items: center;
-        background: radial-gradient(circle at top, #fffdfd 0%, var(--rose-1) 25%, #fbe5f0 48%, #f5d6e7 100%);
+        background: radial-gradient(circle at top, #f4a3a8 0%, #e5707a 35%, #cc3d4c 70%, #a8202f 100%);
         font-family: Georgia, "Times New Roman", serif;
         color: var(--ink);
         overflow-x: hidden;
@@ -54,11 +54,11 @@
         position: absolute;
         inset: 0;
         z-index: 2;
-        background: linear-gradient(135deg, #f9dfe9 0%, #f5c3d8 35%, #eca7c3 100%);
-        border: 2px solid rgba(166, 85, 119, 0.5);
+        background: linear-gradient(135deg, #e8828a 0%, #d24b58 40%, #b02535 100%);
+        border: 2px solid rgba(110, 15, 28, 0.55);
         border-radius: 12px;
         box-shadow:
-          0 18px 35px rgba(143, 66, 101, 0.18),
+          0 18px 35px rgba(110, 20, 30, 0.28),
           inset 0 0 0 4px rgba(255, 255, 255, 0.15);
         overflow: hidden;
       }
@@ -69,7 +69,7 @@
         left: 0;
         width: 100%;
         height: 55%;
-        background: linear-gradient(135deg, #f7d7e6 0%, #faa5c5 100%);
+        background: linear-gradient(135deg, #e8737d 0%, #bf2f3d 100%);
         clip-path: polygon(0 0, 50% 62%, 100% 0);
         transform-origin: top center;
         transition: transform 0.7s cubic-bezier(0.25, 1, 0.35, 1);
@@ -91,10 +91,10 @@
         opacity: 0;
         pointer-events: none;
         padding: 12px;
-        background: linear-gradient(180deg, var(--paper) 0%, #fff7fb 100%);
-        border: 1px solid rgba(160, 93, 127, 0.4);
+        background: linear-gradient(180deg, var(--paper) 0%, #fff5f5 100%);
+        border: 1px solid rgba(150, 40, 50, 0.4);
         box-shadow:
-          0 15px 24px rgba(124, 62, 92, 0.14),
+          0 15px 24px rgba(110, 20, 30, 0.16),
           inset 0 0 0 2px rgba(255, 255, 255, 0.6);
         transform: translate(-50%, -35%) scale(0.85);
         transition:
@@ -119,7 +119,7 @@
         transition-delay: 0.3s, 0.3s, 0.3s;
         z-index: 4;
         box-shadow:
-          0 22px 32px rgba(124, 62, 92, 0.18),
+          0 22px 32px rgba(110, 20, 30, 0.22),
           inset 0 0 0 2px rgba(255, 255, 255, 0.65);
       }
 
@@ -137,7 +137,7 @@
         border: 1px solid var(--rose-6);
         border-radius: 999px;
         background: var(--paper);
-        box-shadow: 0 5px 14px rgba(124, 62, 92, 0.2);
+        box-shadow: 0 5px 14px rgba(90, 10, 20, 0.3);
         color: var(--rose-6);
         font: inherit;
         font-weight: 700;
@@ -146,7 +146,7 @@
       }
 
       .open-letter-button:hover {
-        background: #fff0f6;
+        background: #fff0f0;
       }
 
       .open-letter-button:focus-visible {
@@ -161,7 +161,7 @@
 
       /* Der Rahmen sitzt im Inhalt und wächst mit dem Text bis ganz nach unten */
       .letter-frame {
-        border: 1px solid rgba(186, 118, 151, 0.3);
+        border: 1px solid rgba(168, 20, 42, 0.3);
         padding: 26px clamp(16px, 4vw, 36px) 24px;
       }
 
@@ -203,7 +203,7 @@
       }
 
       .letter-close:hover {
-        background: #963155;
+        background: #820f20;
       }
 
       .letter-close:focus-visible {
@@ -211,13 +211,45 @@
         outline-offset: 3px;
       }
 
+      /* Hinweis auf dem geschlossenen Umschlag */
+      .envelope-whisper {
+        position: absolute;
+        top: calc(50% + 46px);
+        left: 50%;
+        z-index: 5;
+        transform: translateX(-50%);
+        margin: 0;
+        color: #fff;
+        font-style: italic;
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        opacity: 0.6;
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .envelope.open .envelope-whisper {
+        opacity: 0;
+      }
+
+      .letter .whisper {
+        margin: 32px 0 4px;
+        text-align: center;
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        opacity: 0.4;
+        user-select: none;
+      }
+
       .toast {
         position: fixed;
-        top: calc(env(safe-area-inset-top, 0px) + 20px);
-        left: 50%;
-        z-index: 9999;
-        width: max-content;
-        max-width: calc(100vw - 32px);
+        top: calc(env(safe-area-inset-top, 0px) + 16px);
+        left: 16px;
+        right: 16px;
+        margin: 0 auto;
+        z-index: 2147483647;
+        width: fit-content;
+        max-width: calc(100% - 32px);
         padding: 14px 26px;
         border: 1px solid var(--rose-6);
         border-radius: 28px;
@@ -227,16 +259,19 @@
         font-style: italic;
         font-weight: 700;
         text-align: center;
-        box-shadow: 0 8px 20px rgba(124, 62, 92, 0.22);
+        box-shadow: 0 8px 20px rgba(110, 20, 30, 0.28);
         opacity: 0;
+        visibility: hidden;
         pointer-events: none;
-        transform: translate(-50%, -20px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: translateY(-20px);
+        transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
       }
 
       .toast.show {
         opacity: 1;
-        transform: translate(-50%, 0);
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s;
       }
 
       @media (max-width: 560px) {
@@ -282,71 +317,131 @@
     </style>
   </head>
   <body>
-    <div class="toast" id="toast" role="status" aria-live="polite">your avoidance could never scare me</div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <div class="scene">
       <div class="envelope" id="envelope">
         <div class="envelope-body"></div>
         <button class="open-letter-button" type="button" aria-controls="letter" aria-expanded="false">
-          open if you're ready ccutie
+          didn't expect you to find this
         </button>
+        <p class="envelope-whisper">what's a heart?&lt;3</p>
 
         <div class="letter" id="letter" role="dialog" aria-label="Love letter">
           <div class="letter-frame">
           <h1>To my Dearest CC,</h1>
 
           <p>
-            whenever youre reading this, i hope you know that i care so much more about you than i could ever put in words or actions.
-            no paragraph or spoiling could ever express how i feel.
-            and im scared to show it to you so ill go with your flow.
+            i didn't tell you that i changed this website so whenver youre finding this i am curious why you're here? but now that you're here you can enjoy? this new paragraph.
           </p>
 
           <p>
-            but know that whenever you feel ready for anything, more or less, ill go with it because i am so ready to go through anything with you.
-            let me flirt with you or push me away so its almost impossible for me to climb back up to you.
-            ill really do anything it needs to be with you in the end.
+            its now november 3rd and i dont know if you'll ever read this if not that's okay too. i usually hate opening up to people and writing paragraphs that arent appreciated but you seem to really care and atleast read those. i dont expect you to read any of those weird texts i write but it just helps me to feel better and idk myabe you can understand me better too.
           </p>
 
           <p>
-            i know how hard it will be and i know that pretty sure both of us will go through hard times every now and then but i will be with you making you feel safe.
-            whenever it gets too much you can always fall down on me or use me to lose stress or avoidance by pushing me away.
-            lose me as you want so you feel better, please.
+            i know that you are fighting with your avoidance every day and that you are improving currently makes me so happy and proud. i cant understand you fully and i know that but i am trying my best to feel empathic and try to know you as good as i can.
           </p>
 
           <p>
-            whenever you read this and no matter how good or bad you feel, know that i am thinking about you, i always do. i will never leave you alone anymore.
+            im sure that knowing you're avoidant could really scare some people away but it only made me more interested in you and no not because i wanna get emotionally destroyed but i wanted to help you since the first day. but when you really pushed me away the first time i didnt know how to handle it but i thought about it a lot in the meantime and know it know what i want. i want you and i know this will eventually take forever if you dont even want me back? i really want to be the one for you and im ready to do a lot for it but i am so stupid for you eventually not even wanting the same from me back? i dont know what i should feel because i know that you like me but i dont know if you could ever see more than your best friend in me? and hell no i dont want us to be together next week i just want to be with you after ive done my job as the best friend helping you through your worst. and whenever you read this i know that your reaction will make me feel so ashamed and embarrassed but it's okay. i could write this aaaaall down just for myself so you never read it but when the time is right you should know how i feel. and no im also not confessing my feelings in this i just want you to know what i want. and if you dont want the same its okay. ill be your best friend forever if that means i can be with you.
           </p>
 
           <p>
-            i am scared that everything i say just feels the same in the end but even if it does, i just want you to know that i really try to think about new things to tell you cause you deserve it.
-            you deserve the world and no one could give it to you so im trying my best.
-            i wanna be good for you so bad.
-            i wanna be what you like.
-            as much as possible.
+            i am curious what you see in me and how i make your avoidance feel if you say its getting better.
           </p>
 
           <p>
-            i love and hate missing you at the same time. every time i miss you it hurts but i know that talking to you the next time will feel so much better cause i was missing you so much.
+            i am curious to just know every little detail about you because yes, i also love details.
           </p>
 
           <p>
-            AND one thing i so love about you is the way you like to dress up. i love to get your outfit pictures and when you tell me what you thought when making that outfit like omg yes please tell me what went through your little pretty head when choosing this insane looking outfit.
+            today i really missed you again and bought a rio punch but was too scared to tell you about it.
           </p>
 
           <p>
-            and i dont want this to be long but honest. i really want you to be better. i know this is a lot i expect from you but if we trust each other enough i am so sure we can do amazing things.
-            i will only say this once but im trying really bad for you to like me.
+            i miss you so much it confuses me. i dont know why i feel the way i feel but i do.
           </p>
 
           <p>
-            and when you said today that i make you feel better with your avoidance it made me feel so much better.
-            my heart started to feel so much easier instead of so heavy.
+            i feel like im also changing for you.
           </p>
 
-          <p>thank you for everything dear cc. love you so so so so fucking much</p>
+          <p>
+            whenever something cool happens i just want to tell you about cause i know youd find it awesome too but i am holding back cause when i like you give my full love and attention i am scared it could turn you more avoidant so i am holding back my desires, just for you.
+          </p>
+
+          <p>
+            you are such a lover girl that never found someone who appreciates you the way you are and is ready to commit to you for some reason. i hate how they can let you go like that? you are so beautiful, caring, sweet, awesome, fantastic, goofy, funny at the same time. i know i can talk to you seriously and then like scream laugh at each other right after and i really love that about you.
+          </p>
+
+          <p>
+            what i also love about you is how you put me up at the same level as leah like i know i dont mean as much to you like your hg but still me comparing makes me feel so wanted and so good. please dont stop with that. please make me feel wanted because i know i can make you feel wanted to. once youre ready for it i will give you all my love and attention, i give you my word for it. i love with all my heart and trust me, its big okay?
+          </p>
+
+          <p>
+            i know that this shits much more lovey dovey than what i usually say but if you wanna stop it here, go on. have a great day baby
+          </p>
+
+          <p>
+            but if youre still reading this then be warned cause im getting really emotional right now and ill let it out on this one.
+          </p>
+
+          <p>
+            you make me feel like noone else did before and thats why i fell for you once and would gladly do it again but i wont fall first cause i know how it would turn out and thats the opposite of what i want.
+          </p>
+
+          <p>
+            i dont wanna rush our love story and end it cause ill run into an avoidant version of yourself.
+          </p>
+
+          <p>
+            i would hate myself if i am close to actually helping you and then ruin it by my own feelings. but i think im pretty good at controlling them so youre good to go cc
+          </p>
+
+          <p>
+            i hate that i like fall fast and catch feelings fast but i am really really trying my best to control it for you cause you deserve so muhc more like another diego.
+          </p>
+
+          <p>
+            i imagine us doing so many silly things i am way too scared to tell you about
+          </p>
+
+          <p>
+            i never held hands before, kissed someone but idk doing it with you doesnt sound too bad
+          </p>
+
+          <p>
+            i want you so bad i lay in bed thinking about you and theres nothing else that can get into my head.
+          </p>
+
+          <p>
+            youre stuck in there since the day we started talking again and idk what to do about it?
+          </p>
+
+          <p>
+            im just glad you also like me in atleast a certain way cause id go insane if you didnt but im so scared im expecting much more out of this than me? do you like me? am i your type? do i treat you well?
+          </p>
+
+          <p>
+            i dont want you ever overthink something about me and if you do let me know because i will overexplain.
+          </p>
+
+          <p>
+            i will finish this now cause the more i say the worse i feel.
+          </p>
+
+         <p>
+           and yes, i will talk you through it.
+          </p>
+           
+            <p>
+            love you chen, really really do. mwah
+          </p>
 
           <p class="signature">forever yours, juju</p>
           <button class="letter-close" type="button">Close letter</button>
+          <p class="whisper">what's a heart?</p>
           </div>
         </div>
 
@@ -363,8 +458,9 @@
       const toast = document.getElementById("toast");
       let toastTimer;
 
-      function showToast() {
+      function showToast(message) {
         clearTimeout(toastTimer);
+        toast.textContent = message;
         toast.classList.add("show");
         toastTimer = setTimeout(() => toast.classList.remove("show"), 5000);
       }
@@ -382,9 +478,23 @@
           letter.scrollTop = 0;
           hideToast();
         } else if (wasOpen) {
-          showToast();
+          showToast("your avoidance could never scare me");
         }
       }
+
+      // Hinweis beim Öffnen der Seite - erst wenn sie wirklich sichtbar ist (wichtig fürs Handy)
+      let introShown = false;
+      function showIntro() {
+        if (introShown || document.visibilityState === "hidden") return;
+        introShown = true;
+        setTimeout(() => {
+          if (!envelope.classList.contains("open")) showToast("new letter dropped!");
+        }, 600);
+      }
+      document.addEventListener("DOMContentLoaded", showIntro);
+      window.addEventListener("load", showIntro);
+      window.addEventListener("pageshow", showIntro);
+      document.addEventListener("visibilitychange", showIntro);
 
       // Klick auf den Umschlag oder den Button öffnet den Brief
       envelope.addEventListener("click", (event) => {
