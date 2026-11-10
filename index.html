@@ -22,7 +22,7 @@
         min-height: 100vh;
         display: grid;
         place-items: center;
-        background: radial-gradient(circle at top, #f3f9ff 0%, #d9ebfc 30%, #bfdcf7 62%, #a6c8f0 100%);
+        background: radial-gradient(circle at top, #fff5f9 0%, #ffe3ee 35%, #fbd0e2 70%, #f4bcd5 100%);
         font-family: Georgia, "Times New Roman", serif;
         color: var(--ink);
         overflow-x: hidden;
@@ -91,10 +91,10 @@
         opacity: 0;
         pointer-events: none;
         padding: 12px;
-        background: linear-gradient(180deg, #fffbfd 0%, #fdeff7 100%);
-        border: 1px solid rgba(176, 74, 110, 0.35);
+        background: linear-gradient(160deg, #f1f8ff 0%, #d6e8fb 55%, #bcd6f4 100%);
+        border: 1px solid rgba(80, 120, 170, 0.4);
         box-shadow:
-          0 15px 24px rgba(150, 80, 120, 0.18),
+          0 15px 24px rgba(80, 120, 170, 0.22),
           inset 0 0 0 2px rgba(255, 255, 255, 0.6);
         transform: translate(-50%, -35%) scale(0.85);
         transition:
@@ -103,7 +103,7 @@
           width 0.6s ease;
         z-index: 1;
         font-style: italic;
-        color: var(--ink);
+        color: #3f5a86;
         cursor: default;
       }
 
@@ -119,7 +119,7 @@
         transition-delay: 0.3s, 0.3s, 0.3s;
         z-index: 4;
         box-shadow:
-          0 22px 32px rgba(150, 80, 120, 0.24),
+          0 22px 32px rgba(80, 120, 170, 0.28),
           inset 0 0 0 2px rgba(255, 255, 255, 0.65);
       }
 
@@ -161,7 +161,7 @@
 
       /* Der Rahmen sitzt im Inhalt und wächst mit dem Text bis ganz nach unten */
       .letter-frame {
-        border: 1px solid rgba(176, 74, 110, 0.3);
+        border: 1px solid rgba(80, 120, 170, 0.4);
         padding: 26px clamp(16px, 4vw, 36px) 24px;
       }
 
@@ -186,16 +186,16 @@
         font-style: normal;
         font-weight: 700;
         letter-spacing: 0.06em;
-        color: var(--rose-6);
+        color: #4a6a9c;
       }
 
       .letter-close {
         display: block;
         margin: 28px auto 0;
         padding: 12px 24px;
-        border: 1px solid var(--rose-6);
+        border: 1px solid #5b7fb3;
         border-radius: 999px;
-        background: var(--rose-6);
+        background: #5b7fb3;
         color: white;
         font: inherit;
         font-style: normal;
@@ -203,11 +203,11 @@
       }
 
       .letter-close:hover {
-        background: #963a5a;
+        background: #46679b;
       }
 
       .letter-close:focus-visible {
-        outline: 3px solid var(--rose-4);
+        outline: 3px solid #9fc0ea;
         outline-offset: 3px;
       }
 
