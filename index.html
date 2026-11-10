@@ -6,11 +6,11 @@
     <title>Love Letter</title>
     <style>
       :root {
-        --rose-1: #fff1f1;
-        --rose-4: #e0525c;
-        --rose-6: #a8142a;
-        --paper: #fffafa;
-        --ink: #5c1f26;
+        --rose-1: #fff4f8;
+        --rose-4: #e89ab4;
+        --rose-6: #b04a6e;
+        --paper: #fffbfd;
+        --ink: #6b4560;
       }
 
       * {
@@ -22,7 +22,7 @@
         min-height: 100vh;
         display: grid;
         place-items: center;
-        background: radial-gradient(circle at top, #f4a3a8 0%, #e5707a 35%, #cc3d4c 70%, #a8202f 100%);
+        background: radial-gradient(circle at top, #f3f9ff 0%, #d9ebfc 30%, #bfdcf7 62%, #a6c8f0 100%);
         font-family: Georgia, "Times New Roman", serif;
         color: var(--ink);
         overflow-x: hidden;
@@ -54,11 +54,11 @@
         position: absolute;
         inset: 0;
         z-index: 2;
-        background: linear-gradient(135deg, #e8828a 0%, #d24b58 40%, #b02535 100%);
-        border: 2px solid rgba(110, 15, 28, 0.55);
+        background: linear-gradient(135deg, #d8ebfc 0%, #b4d4f3 45%, #93bde8 100%);
+        border: 2px solid rgba(80, 120, 170, 0.5);
         border-radius: 12px;
         box-shadow:
-          0 18px 35px rgba(110, 20, 30, 0.28),
+          0 18px 35px rgba(80, 120, 170, 0.28),
           inset 0 0 0 4px rgba(255, 255, 255, 0.15);
         overflow: hidden;
       }
@@ -69,7 +69,7 @@
         left: 0;
         width: 100%;
         height: 55%;
-        background: linear-gradient(135deg, #e8737d 0%, #bf2f3d 100%);
+        background: linear-gradient(135deg, #e3f0fd 0%, #a5c8ee 100%);
         clip-path: polygon(0 0, 50% 62%, 100% 0);
         transform-origin: top center;
         transition: transform 0.7s cubic-bezier(0.25, 1, 0.35, 1);
@@ -91,10 +91,10 @@
         opacity: 0;
         pointer-events: none;
         padding: 12px;
-        background: linear-gradient(180deg, var(--paper) 0%, #fff5f5 100%);
-        border: 1px solid rgba(150, 40, 50, 0.4);
+        background: linear-gradient(180deg, #fffbfd 0%, #fdeff7 100%);
+        border: 1px solid rgba(176, 74, 110, 0.35);
         box-shadow:
-          0 15px 24px rgba(110, 20, 30, 0.16),
+          0 15px 24px rgba(150, 80, 120, 0.18),
           inset 0 0 0 2px rgba(255, 255, 255, 0.6);
         transform: translate(-50%, -35%) scale(0.85);
         transition:
@@ -119,7 +119,7 @@
         transition-delay: 0.3s, 0.3s, 0.3s;
         z-index: 4;
         box-shadow:
-          0 22px 32px rgba(110, 20, 30, 0.22),
+          0 22px 32px rgba(150, 80, 120, 0.24),
           inset 0 0 0 2px rgba(255, 255, 255, 0.65);
       }
 
@@ -134,11 +134,11 @@
         z-index: 5;
         transform: translate(-50%, -50%);
         padding: 14px 22px;
-        border: 1px solid var(--rose-6);
+        border: 1px solid #d9648f;
         border-radius: 999px;
-        background: var(--paper);
-        box-shadow: 0 5px 14px rgba(90, 10, 20, 0.3);
-        color: var(--rose-6);
+        background: linear-gradient(135deg, #ffd3e4 0%, #ffb3d0 100%);
+        box-shadow: 0 5px 14px rgba(217, 100, 143, 0.4);
+        color: #8f2252;
         font: inherit;
         font-weight: 700;
         cursor: pointer;
@@ -146,7 +146,7 @@
       }
 
       .open-letter-button:hover {
-        background: #fff0f0;
+        background: linear-gradient(135deg, #ffc2da 0%, #ff9fc3 100%);
       }
 
       .open-letter-button:focus-visible {
@@ -161,7 +161,7 @@
 
       /* Der Rahmen sitzt im Inhalt und wächst mit dem Text bis ganz nach unten */
       .letter-frame {
-        border: 1px solid rgba(168, 20, 42, 0.3);
+        border: 1px solid rgba(176, 74, 110, 0.3);
         padding: 26px clamp(16px, 4vw, 36px) 24px;
       }
 
@@ -203,7 +203,7 @@
       }
 
       .letter-close:hover {
-        background: #820f20;
+        background: #963a5a;
       }
 
       .letter-close:focus-visible {
@@ -219,10 +219,10 @@
         z-index: 5;
         transform: translateX(-50%);
         margin: 0;
-        color: #fff;
+        color: #3f5f8a;
         font-style: italic;
         font-size: clamp(0.95rem, 2vw, 1.1rem);
-        opacity: 0.6;
+        opacity: 0.75;
         white-space: nowrap;
         pointer-events: none;
         user-select: none;
@@ -259,7 +259,7 @@
         font-style: italic;
         font-weight: 700;
         text-align: center;
-        box-shadow: 0 8px 20px rgba(110, 20, 30, 0.28);
+        box-shadow: 0 8px 20px rgba(150, 80, 120, 0.28);
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
@@ -323,120 +323,56 @@
       <div class="envelope" id="envelope">
         <div class="envelope-body"></div>
         <button class="open-letter-button" type="button" aria-controls="letter" aria-expanded="false">
-          didn't expect you to find this
+          for my bunny
         </button>
-        <p class="envelope-whisper">what's a heart?&lt;3</p>
+        <p class="envelope-whisper">my tongue's tied</p>
 
         <div class="letter" id="letter" role="dialog" aria-label="Love letter">
           <div class="letter-frame">
-          <h1>To my Dearest CC,</h1>
+          <h1>my dear little girl</h1>
 
           <p>
-            i didn't tell you that i changed this website so whenver youre finding this i am curious why you're here? but now that you're here you can enjoy? this new paragraph.
-          </p>
-
-          <p>
-            its now november 3rd and i dont know if you'll ever read this if not that's okay too. i usually hate opening up to people and writing paragraphs that arent appreciated but you seem to really care and atleast read those. i dont expect you to read any of those weird texts i write but it just helps me to feel better and idk myabe you can understand me better too.
+            if you found this then please just text me first, before you read any of it, why did you look at that website again? what made you come back? i am so curious.
           </p>
 
           <p>
-            i know that you are fighting with your avoidance every day and that you are improving currently makes me so happy and proud. i cant understand you fully and i know that but i am trying my best to feel empathic and try to know you as good as i can.
+            but since youre here now then take your time and read whatever mess ill write now.
           </p>
 
           <p>
-            im sure that knowing you're avoidant could really scare some people away but it only made me more interested in you and no not because i wanna get emotionally destroyed but i wanted to help you since the first day. but when you really pushed me away the first time i didnt know how to handle it but i thought about it a lot in the meantime and know it know what i want. i want you and i know this will eventually take forever if you dont even want me back? i really want to be the one for you and im ready to do a lot for it but i am so stupid for you eventually not even wanting the same from me back? i dont know what i should feel because i know that you like me but i dont know if you could ever see more than your best friend in me? and hell no i dont want us to be together next week i just want to be with you after ive done my job as the best friend helping you through your worst. and whenever you read this i know that your reaction will make me feel so ashamed and embarrassed but it's okay. i could write this aaaaall down just for myself so you never read it but when the time is right you should know how i feel. and no im also not confessing my feelings in this i just want you to know what i want. and if you dont want the same its okay. ill be your best friend forever if that means i can be with you.
+            i think back to when we first met so often. i remember how we instantly talked about our issues and thought it would work being so naive and in the end it just ruined us cause we still rushed it even tho we said we woulndt. you have no idea how sad i felt seeing you getting with another one right after me. i felt so worthless just because you chose someone else over me but i just had no idea how you work and now i know that i still dont and never will but i atleast know a bit of you. and im not afraid anymore, eventho im a bit scared of you, to get close to you because i expect to be pushed away some day so if you ever feel like you need to, do it. yesterday i told you about my feelings more than ever and how i feel about you and i mentioned my jealousy and god its just getting worse. i dont like seeing you with someone else even tho it still satisfies me knowing youre happy but something blocks that feeling of joy?? i just want to be with that pretty bunny
           </p>
 
           <p>
-            i am curious what you see in me and how i make your avoidance feel if you say its getting better.
+            I really do know that you dont want me in any way more than a best friend but i cant help it. i am so crazy over you i cant get anything in my mind but you. im at work and its just you. i am at home its just you. i am at physio its just you. it doesnt matter what time, where i am, who im with its just always you. all roads lead back to you chen.
           </p>
 
           <p>
-            i am curious to just know every little detail about you because yes, i also love details.
+            i cant describe how special you are to me and i was just watching my series and now im just writing that stupid paragraph cause i cant help it but let it out. deep down i really wish you would just never find this so im not embarrassed by your reaction afterwards but i guess its okay?
           </p>
 
           <p>
-            today i really missed you again and bought a rio punch but was too scared to tell you about it.
+            i wonder if you really even care about those paragraphs cause id love one back. i dont want you to sweet talk me the whole time but just explain your feelings a bit so i know whats going on. tell me your desires, your struggles, who you like, who you dont its just hat youre so interesting
           </p>
 
           <p>
-            i miss you so much it confuses me. i dont know why i feel the way i feel but i do.
+            you cant tell me something uninteresting because no matter what it was i always end up being invested and love it somehow? how do you turn it all so nice? i know that you are special theres just so much about that makes it that i dont even can name 1 reason why youre this special to me, cause there are so many. its from the way you talk to the way you look over the things you like and do. in my head youre just a little girl
           </p>
 
           <p>
-            i feel like im also changing for you.
+            i hope you can get over whatever episode youre on right now and if youre ready to accept my help ill gladly do.
           </p>
 
           <p>
-            whenever something cool happens i just want to tell you about cause i know youd find it awesome too but i am holding back cause when i like you give my full love and attention i am scared it could turn you more avoidant so i am holding back my desires, just for you.
+            its just that i wont force my help because you are so strong yourself and if you really need help youll get it, hopefully
           </p>
 
           <p>
-            you are such a lover girl that never found someone who appreciates you the way you are and is ready to commit to you for some reason. i hate how they can let you go like that? you are so beautiful, caring, sweet, awesome, fantastic, goofy, funny at the same time. i know i can talk to you seriously and then like scream laugh at each other right after and i really love that about you.
+            i want you to know how important and special you are to me and theres nothing that could ever change it.
           </p>
 
           <p>
-            what i also love about you is how you put me up at the same level as leah like i know i dont mean as much to you like your hg but still me comparing makes me feel so wanted and so good. please dont stop with that. please make me feel wanted because i know i can make you feel wanted to. once youre ready for it i will give you all my love and attention, i give you my word for it. i love with all my heart and trust me, its big okay?
-          </p>
-
-          <p>
-            i know that this shits much more lovey dovey than what i usually say but if you wanna stop it here, go on. have a great day baby
-          </p>
-
-          <p>
-            but if youre still reading this then be warned cause im getting really emotional right now and ill let it out on this one.
-          </p>
-
-          <p>
-            you make me feel like noone else did before and thats why i fell for you once and would gladly do it again but i wont fall first cause i know how it would turn out and thats the opposite of what i want.
-          </p>
-
-          <p>
-            i dont wanna rush our love story and end it cause ill run into an avoidant version of yourself.
-          </p>
-
-          <p>
-            i would hate myself if i am close to actually helping you and then ruin it by my own feelings. but i think im pretty good at controlling them so youre good to go cc
-          </p>
-
-          <p>
-            i hate that i like fall fast and catch feelings fast but i am really really trying my best to control it for you cause you deserve so muhc more like another diego.
-          </p>
-
-          <p>
-            i imagine us doing so many silly things i am way too scared to tell you about
-          </p>
-
-          <p>
-            i never held hands before, kissed someone but idk doing it with you doesnt sound too bad
-          </p>
-
-          <p>
-            i want you so bad i lay in bed thinking about you and theres nothing else that can get into my head.
-          </p>
-
-          <p>
-            youre stuck in there since the day we started talking again and idk what to do about it?
-          </p>
-
-          <p>
-            im just glad you also like me in atleast a certain way cause id go insane if you didnt but im so scared im expecting much more out of this than me? do you like me? am i your type? do i treat you well?
-          </p>
-
-          <p>
-            i dont want you ever overthink something about me and if you do let me know because i will overexplain.
-          </p>
-
-          <p>
-            i will finish this now cause the more i say the worse i feel.
-          </p>
-
-         <p>
-           and yes, i will talk you through it.
-          </p>
-           
-            <p>
-            love you chen, really really do. mwah
+            i love you, bunny
           </p>
 
           <p class="signature">forever yours, juju</p>
@@ -478,7 +414,7 @@
           letter.scrollTop = 0;
           hideToast();
         } else if (wasOpen) {
-          showToast("your avoidance could never scare me");
+          showToast("you attract me so bad i cant stay away from you");
         }
       }
 
@@ -488,7 +424,7 @@
         if (introShown || document.visibilityState === "hidden") return;
         introShown = true;
         setTimeout(() => {
-          if (!envelope.classList.contains("open")) showToast("new letter dropped!");
+          if (!envelope.classList.contains("open")) showToast("a newer letter just arrived");
         }, 600);
       }
       document.addEventListener("DOMContentLoaded", showIntro);
