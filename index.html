@@ -17,15 +17,41 @@
         box-sizing: border-box;
       }
 
+      /* Seite selbst nicht scrollbar - der Brief scrollt nur in sich */
+      html {
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+
       body {
         margin: 0;
-        min-height: 100vh;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        overscroll-behavior: none;
         display: grid;
         place-items: center;
         background: radial-gradient(circle at top, #fff5f9 0%, #ffe3ee 35%, #fbd0e2 70%, #f4bcd5 100%);
         font-family: Georgia, "Times New Roman", serif;
         color: var(--ink);
-        overflow-x: hidden;
+      }
+
+      /* Hintergrund-Muster: Gruppen aus Herz und Fragezeichen */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22150%22 viewBox=%220 0 220 150%22%3E%3Cg transform=%22translate%2855 38%29 rotate%28-6%29%22%3E%3Cg transform=%22translate%28-24 0%29 rotate%28-8%29%22%3E%3Ctext x=%220%22 y=%220%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Georgia%2Cserif%22 font-style=%22italic%22 font-weight=%22700%22 font-size=%2236%22 fill=%22%23d9608f%22 fill-opacity=%220.42%22%3E%3F%3C/text%3E%3C/g%3E%3Cg transform=%22translate%2820 3%29 rotate%288%29%22%3E%3Cg transform=%22scale%281.55%29%22%3E%3Cpath d=%22M0 10C-18 -4 -8 -18 0 -8C8 -18 18 -4 0 10Z%22 fill=%22%23ee7fa9%22 fill-opacity=%220.62%22/%3E%3C/g%3E%3Ctext x=%220%22 y=%22-2%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Georgia%2Cserif%22 font-style=%22italic%22 font-weight=%22700%22 font-size=%2212%22 fill=%22%23ffffff%22 fill-opacity=%220.95%22%3Ecc%3C/text%3E%3C/g%3E%3C/g%3E%3Cg transform=%22translate%28165 113%29 rotate%287%29%22%3E%3Cg transform=%22translate%28-24 0%29 rotate%28-8%29%22%3E%3Ctext x=%220%22 y=%220%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Georgia%2Cserif%22 font-style=%22italic%22 font-weight=%22700%22 font-size=%2236%22 fill=%22%23d9608f%22 fill-opacity=%220.42%22%3E%3F%3C/text%3E%3C/g%3E%3Cg transform=%22translate%2820 3%29 rotate%288%29%22%3E%3Cg transform=%22scale%281.55%29%22%3E%3Cpath d=%22M0 10C-18 -4 -8 -18 0 -8C8 -18 18 -4 0 10Z%22 fill=%22%23ee7fa9%22 fill-opacity=%220.62%22/%3E%3C/g%3E%3Ctext x=%220%22 y=%22-2%22 text-anchor=%22middle%22 dominant-baseline=%22central%22 font-family=%22Georgia%2Cserif%22 font-style=%22italic%22 font-weight=%22700%22 font-size=%2212%22 fill=%22%23ffffff%22 fill-opacity=%220.95%22%3Ecc%3C/text%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-size: 220px 150px;
+        animation: drift 40s linear infinite;
+      }
+
+      @keyframes drift {
+        from { background-position: 0 0; }
+        to { background-position: 220px 150px; }
       }
 
       .scene {
@@ -54,11 +80,11 @@
         position: absolute;
         inset: 0;
         z-index: 2;
-        background: linear-gradient(135deg, #d8ebfc 0%, #b4d4f3 45%, #93bde8 100%);
-        border: 2px solid rgba(80, 120, 170, 0.5);
+        background: linear-gradient(135deg, #c9ddf8 0%, #d3cbf0 40%, #e8c2e0 70%, #f4b6d0 100%);
+        border: 2px solid rgba(135, 105, 175, 0.5);
         border-radius: 12px;
         box-shadow:
-          0 18px 35px rgba(80, 120, 170, 0.28),
+          0 18px 35px rgba(135, 100, 165, 0.3),
           inset 0 0 0 4px rgba(255, 255, 255, 0.15);
         overflow: hidden;
       }
@@ -69,7 +95,7 @@
         left: 0;
         width: 100%;
         height: 55%;
-        background: linear-gradient(135deg, #e3f0fd 0%, #a5c8ee 100%);
+        background: linear-gradient(135deg, #f2f7ff 0%, #ece0f8 50%, #fbdcea 100%);
         clip-path: polygon(0 0, 50% 62%, 100% 0);
         transform-origin: top center;
         transition: transform 0.7s cubic-bezier(0.25, 1, 0.35, 1);
@@ -91,7 +117,7 @@
         opacity: 0;
         pointer-events: none;
         padding: 12px;
-        background: linear-gradient(160deg, #f1f8ff 0%, #d6e8fb 55%, #bcd6f4 100%);
+        background: linear-gradient(160deg, #eef5ff 0%, #dde4fa 38%, #ecd9f2 70%, #f8d4e4 100%);
         border: 1px solid rgba(80, 120, 170, 0.4);
         box-shadow:
           0 15px 24px rgba(80, 120, 170, 0.22),
@@ -307,6 +333,10 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
+        body::before {
+          animation: none;
+        }
+
         .flap,
         .letter,
         .envelope {
@@ -346,7 +376,11 @@
           <p>
             I really do know that you dont want me in any way more than a best friend but i cant help it. i am so crazy over you i cant get anything in my mind but you. im at work and its just you. i am at home its just you. i am at physio its just you. it doesnt matter what time, where i am, who im with its just always you. all roads lead back to you chen.
           </p>
-
+         
+          <p>
+            yesterday you told me that you want a real cute love relationship and theres nothing more id love to give you than that. idc about all the freaky stuff i just wanna make you feel loved and wanted.
+          </p>
+         
           <p>
             i cant describe how special you are to me and i was just watching my series and now im just writing that stupid paragraph cause i cant help it but let it out. deep down i really wish you would just never find this so im not embarrassed by your reaction afterwards but i guess its okay?
           </p>
@@ -367,27 +401,9 @@
             its just that i wont force my help because you are so strong yourself and if you really need help youll get it, hopefully
           </p>
 
-         <p>
-           what i always loved most about the neighbourhood was about how beautiful and heartwarming their lyrics are. and suddenly whenever i hear those beautiful lyrics all i can think about is you. i could listen to any song and still find a lyrics thats so pretty that it reminds me of you.
-         </p>
-            <p>
-              i wish i could get you to start choosing me again and i wont give up on it. i want you so bad im going crazy. i am insane after you.
-            </p>
-            <p>
+          <p>
             i want you to know how important and special you are to me and theres nothing that could ever change it.
           </p>
-
-            <p>
-              before i end this text i got one last few things to say. you are so beautiful. like everything about you. your beautiful eyes. your gorgeous body with the way you love to dress up. it all just adds up to a beautiful you. and what makes you even prettier is when you talk sweet. the few times you gave me nicknames my heart was beating so fast i thought i was going insane. help me
-            </p>
-
-            <p>
-              i go through your reposts so often i feel like a mad stalker because i wanna know all about you.
-            </p>
-
-            <p> 
-              you are the best cc
-            </p>
 
           <p>
             i love you, bunny
